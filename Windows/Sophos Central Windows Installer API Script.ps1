@@ -73,6 +73,9 @@ else {
     Stop-Process -processname "sophossetup"
  }
 
+#Force PowerShell to use TLS 1.2
+[Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12
+
 # Download of the Central Customer Installer
 Write-Host ""
 Write-Host "Downloading Sophos Central Installer"

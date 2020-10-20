@@ -1,16 +1,16 @@
 # -----------------------------------------------------------------------------------------------
 # Component: Sophos Central Installer
 # Author: Stephen Weber
-# Purpose: Using the new Sophos Thin installer, 
-#          perform default install of Sophos Central using the defined variables
-# Version 1.2
+# Purpose: Deploy Sophos Central via Active Directory GPO using PowerShell.
+# Script Log Location: c:\temp\SophosCentralInstallLog.txt
+# Version 1.0
 # -----------------------------------------------------------------------------------------------
 
-#Setup Customer Variables
-#CustomerToken - Example - "Customer Token Here"
-#Products - Example - "antivirus,intercept"
-$Global:CustomerToken = 
-$Global:Products = 
+#Define the SophosSetup.exe Installer Location
+#
+#SophosSetup.exe needs to be downloaded from the Sophos Central Admin Dashboard
+
+$InstallerLocation = "\\server\share\SophosSetup.exe"
 
 # Define Functions
 
@@ -40,27 +40,16 @@ else {
 	Write-Host "Sophos MCS Client is Not Running"
 	}
 
-# Check for the Site Variables
+# Check if SophosSetup.exe Exists
 Write-Host ""
-Write-Host "Checking the Variables"
+Write-Host "Checking for SophosSetup.exe"
 
-if ($CustomerToken -eq $null)
-	{Write-Host "--Customer Token Not Set or Missing"
+if !(Test-Path $InstallerLocation -PathType leaf)
+	{Write-Host "--SophosSetup.exe Missing or Path is incorrect"
     Stop-Transcript
 	Exit 1}
 else
-	{Write-Host "--CustomerToken = "$CustomerToken""}
-
-if ($Products -eq $null)
-	{Write-Host "--Sophos Products Not Set or Missing"
-	Stop-Transcript
-	Exit 1}
-else
-	{Write-Host "--Products = "$Products""}
-
-# Sophos parameters are defined from the site specific variables
-$arguments = "--products=""" + $Products
-$arguments = $arguments + """ --quiet"
+	{Write-Host "--InstallerLocation = "$InstallerLocation""}
 
 # Check to see if a previous SophosSetup Process is running
 Write-Host ""
@@ -76,27 +65,14 @@ else {
 #Force PowerShell to use TLS 1.2
 [Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12
 
-# Download of the Central Customer Installer
-Write-Host ""
-Write-Host "Downloading Sophos Central Installer"
-Invoke-WebRequest -Uri "https://central.sophos.com/api/partners/download/windows/v1/$CustomerToken/SophosSetup.exe" -OutFile SophosSetup.exe
-if ((Test-Path SophosSetup.exe) -eq "True"){
-		Write-Host "--Sophos Setup Installer Downloaded Successfully"
-}
-else {
-	Write-Host "--Sophos Central Installer Did Not Download - Please check Firewall or Web Filter"
-	Stop-Transcript
-	Exit 1
-}
-
 # This Section starts the installer using the arguments defined above
 Write-Host ""
 Write-Host "Installing Sophos Central Endpoint:"
 Write-Host ""
-Write-Host "SophosSetup.exe "$arguments""
+Write-Host "From: "$InstallerLocation""
 Write-Host ""
 
-start-process SophosSetup.exe $arguments
+start-process $InstallerLocation
 
 $timeout = new-timespan -Minutes 30
 $install = [diagnostics.stopwatch]::StartNew()

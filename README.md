@@ -18,6 +18,7 @@ Example:
 Products:
   Central Endpoint Protection - antivirus
   Central Intercept X Advanced - antivirus,intercept
+  Central Intercept X Advanced with XDR - antivirus,intercept,xdr
   Central Intercept X Advanced with MTR - antivirus,intercept,mdr
   Adding DeviceEncryption - products,deviceEncryption
 ```
@@ -36,6 +37,7 @@ Example:
 Options:
   #Central Endpoint Protection: "antivirus"
   #Central Intercept X Advanced: "antivirus intercept"
+  #Central Intercept X Adv with XDR: "antivirus intercept xdr"
   #Central Intercept X Adv with MTR: "antivirus intercept mdr"
 ```
 ```

@@ -19,8 +19,9 @@ Products:
   Central Intercept X Essentials - antivirus,intercept
   Central Intercept X Advanced - antivirus,intercept
   Central Intercept X Advanced with XDR - antivirus,intercept,xdr
-  Central Intercept X Advanced with MTR - antivirus,intercept,mdr
+  Sophos MDR - antivirus,intercept,xdr,mdr
   Adding DeviceEncryption - products,deviceEncryption
+  Adding ZTNA - products,ztna
 ```
 <b>macOS</b>
 
@@ -38,7 +39,7 @@ Options:
   #Central Intercept X Essentials: "antivirus intercept"
   #Central Intercept X Advanced: "antivirus intercept"
   #Central Intercept X Adv with XDR: "antivirus intercept xdr"
-  #Central Intercept X Adv with MTR: "antivirus intercept mdr"
+  #Sophos MDR: "antivirus intercept xdr mdr"
 ```
 ```
 Additional Product:

@@ -26,7 +26,7 @@ SophosDeviceEncryption="false"
 SophosInstalled(){
 if pgrep SophosMcsAgentD; then MCSstatus="Protected"; else MCSstatus="NotProtected"; fi
 
-if pgrep SophosAutoUpdate; then AUstatus="Protected"; else AUstatus="NotProtected"; fi
+if pgrep SophosUpdater; then AUstatus="Protected"; else AUstatus="NotProtected"; fi
 
 if open -Ra "Sophos Endpoint"; then Sophos="Installed"; else Sophos="NotInstalled"; fi
 }

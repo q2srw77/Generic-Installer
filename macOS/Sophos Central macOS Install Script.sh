@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/zsh
 
 # -----------------------------------------------------------------------------------------------
 # Component: Sophos Central Installation
@@ -15,9 +15,9 @@ SophosMgmtServer_macOS="macOS Mgmt Server Location Here"
 	#macOS Mgmt Server Location from CSV
 SophosEndpointSelection="antivirus intercept" 
 	#Options:
-		#Central Endpoint Protection: "antivirus"
-		#Central Intercept X Advanced: "antivirus intercept"
-		#Central Intercept X Adv with MTR: "antivirus intercept mdr"
+		#Sophos Intercept X: "antivirus intercept"
+		#Sophos Intercept X with XDR: "antivirus intercept xdr"
+		#Sophos MDR: "antivirus intercept xdr mdr"
 SophosDeviceEncryption="false"
 	#Options: true or false
 
@@ -116,7 +116,7 @@ chmod a+x Sophos\ Installer.app/Contents/MacOS/tools/com.sophos.bootstrap.helper
 
 #Start Installation
 
-./Sophos\ Installer.app/Contents/MacOs/Sophos\ Installer $arguments
+./Sophos\ Installer.app/Contents/MacOs/Sophos\ Installer ${=arguments}
 
 #Sleep while waiting for the Installation to Complete
 
